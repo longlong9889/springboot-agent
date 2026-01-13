@@ -36,7 +36,7 @@ function App() {
         formData.append("project", file);
 
         try {
-            const response = await axios.post("http://localhost:3001/api/upload", formData, {
+            const response = await axios.post("https://springboot-agent-api.onrender.com/api/upload", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 
@@ -72,7 +72,7 @@ function App() {
         setLoading(true);
 
         try {
-            const response = await axios.post("http://localhost:3001/api/chat", {
+            const response = await axios.post("https://springboot-agent-api.onrender.com/api/chat", {
                 message: userMessage,
                 sessionId,
             });
