@@ -10,9 +10,10 @@ import * as path from "path";
 import * as fs from "fs";
 import { chat } from "./agent";
 import { loadProjectData } from "./tools";
+import { parseProject } from "./parser";
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // Generate unique ID using built-in crypto
 function generateId(): string {
@@ -97,23 +98,10 @@ app.post("/api/upload", upload.single("project"), async (req, res) => {
             projectRoot = foundRoot;
         }
 
-        // Run the Java parser
-        const { exec } = await import("child_process");
-        const jarPath = path.join(__dirname, "..", "..", "springboot-agent", "target", "springboot-analyzer-1.0-SNAPSHOT.jar");
-
-        await new Promise<void>((resolve, reject) => {
-            const command = `java -jar "${jarPath}" "${projectRoot}" "${jsonPath}"`;
-
-            exec(command, (error, stdout, stderr) => {
-                if (error) {
-                    console.error("Parser error:", stderr);
-                    reject(error);
-                    return;
-                }
-                console.log("Parser output:", stdout);
-                resolve();
-            });
-        });
+        // Run the TypeScript parser
+        const projectOutput = parseProject(projectRoot);
+        fs.writeFileSync(jsonPath, JSON.stringify(projectOutput, null, 2));
+        console.log("Parser output: Analysis complete");
 
         // Verify JSON was created
         if (!fs.existsSync(jsonPath)) {
