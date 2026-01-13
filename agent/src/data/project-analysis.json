@@ -1,0 +1,1685 @@
+{
+  "controllers": [
+    {
+      "className": "AuthenticationController",
+      "basePath": "api/v1/auth",
+      "endpoints": [
+        {
+          "httpMethod": "POST",
+          "path": "login",
+          "methodName": "login",
+          "returnType": "ResponseEntity\u003c?\u003e",
+          "parameters": [
+            {
+              "name": "request",
+              "type": "AuthenticationRequest",
+              "annotation": "RequestBody"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "CustomerController",
+      "basePath": "api/v1/customers",
+      "endpoints": [
+        {
+          "httpMethod": "GET",
+          "path": "",
+          "methodName": "getCustomers",
+          "returnType": "List\u003cCustomerDTO\u003e",
+          "parameters": []
+        },
+        {
+          "httpMethod": "GET",
+          "path": "{customerId}",
+          "methodName": "getCustomer",
+          "returnType": "CustomerDTO",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        },
+        {
+          "httpMethod": "POST",
+          "path": "",
+          "methodName": "registerCustomer",
+          "returnType": "ResponseEntity\u003c?\u003e",
+          "parameters": [
+            {
+              "name": "request",
+              "type": "CustomerRegistrationRequest",
+              "annotation": "RequestBody"
+            }
+          ]
+        },
+        {
+          "httpMethod": "DELETE",
+          "path": "{customerId}",
+          "methodName": "deleteCustomer",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        },
+        {
+          "httpMethod": "PUT",
+          "path": "{customerId}",
+          "methodName": "updateCustomer",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            },
+            {
+              "name": "updateRequest",
+              "type": "CustomerUpdateRequest",
+              "annotation": "RequestBody"
+            }
+          ]
+        },
+        {
+          "httpMethod": "POST",
+          "path": "{customerId}/profile-image",
+          "methodName": "uploadCustomerProfilePicture",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            },
+            {
+              "name": "file",
+              "type": "MultipartFile",
+              "annotation": "RequestParam"
+            }
+          ]
+        },
+        {
+          "httpMethod": "GET",
+          "path": "{customerId}/profile-image",
+          "methodName": "getCustomerProfilePicture",
+          "returnType": "byte[]",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "FavoriteController",
+      "basePath": "/api/v1/favorites",
+      "endpoints": [
+        {
+          "httpMethod": "GET",
+          "path": "/customer/{customerId}",
+          "methodName": "getFavorites",
+          "returnType": "ResponseEntity\u003cList\u003cFavoriteDTO\u003e\u003e",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        },
+        {
+          "httpMethod": "GET",
+          "path": "/check",
+          "methodName": "isFavorited",
+          "returnType": "ResponseEntity\u003cBoolean\u003e",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer",
+              "annotation": "RequestParam"
+            },
+            {
+              "name": "itemId",
+              "type": "Integer",
+              "annotation": "RequestParam"
+            }
+          ]
+        },
+        {
+          "httpMethod": "GET",
+          "path": "/count/{itemId}",
+          "methodName": "getFavoriteCount",
+          "returnType": "ResponseEntity\u003cLong\u003e",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        },
+        {
+          "httpMethod": "POST",
+          "path": "",
+          "methodName": "addFavorite",
+          "returnType": "ResponseEntity\u003cFavoriteDTO\u003e",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer",
+              "annotation": "RequestParam"
+            },
+            {
+              "name": "itemId",
+              "type": "Integer",
+              "annotation": "RequestParam"
+            }
+          ]
+        },
+        {
+          "httpMethod": "DELETE",
+          "path": "",
+          "methodName": "removeFavorite",
+          "returnType": "ResponseEntity\u003cVoid\u003e",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer",
+              "annotation": "RequestParam"
+            },
+            {
+              "name": "itemId",
+              "type": "Integer",
+              "annotation": "RequestParam"
+            }
+          ]
+        },
+        {
+          "httpMethod": "POST",
+          "path": "/toggle",
+          "methodName": "toggleFavorite",
+          "returnType": "ResponseEntity\u003cVoid\u003e",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer",
+              "annotation": "RequestParam"
+            },
+            {
+              "name": "itemId",
+              "type": "Integer",
+              "annotation": "RequestParam"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "ItemController",
+      "basePath": "/api/v1/items",
+      "endpoints": [
+        {
+          "httpMethod": "GET",
+          "path": "",
+          "methodName": "getAllItems",
+          "returnType": "ResponseEntity\u003cList\u003cItemDTO\u003e\u003e",
+          "parameters": []
+        },
+        {
+          "httpMethod": "GET",
+          "path": "/available",
+          "methodName": "getAllAvailableItems",
+          "returnType": "ResponseEntity\u003cList\u003cItemDTO\u003e\u003e",
+          "parameters": []
+        },
+        {
+          "httpMethod": "GET",
+          "path": "/{itemId}",
+          "methodName": "getItem",
+          "returnType": "ResponseEntity\u003cItemDTO\u003e",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        },
+        {
+          "httpMethod": "GET",
+          "path": "/seller/{sellerId}",
+          "methodName": "getItemsBySeller",
+          "returnType": "ResponseEntity\u003cList\u003cItemDTO\u003e\u003e",
+          "parameters": [
+            {
+              "name": "sellerId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        },
+        {
+          "httpMethod": "GET",
+          "path": "/category/{category}",
+          "methodName": "getItemsByCategory",
+          "returnType": "ResponseEntity\u003cList\u003cItemDTO\u003e\u003e",
+          "parameters": [
+            {
+              "name": "category",
+              "type": "String",
+              "annotation": "PathVariable"
+            }
+          ]
+        },
+        {
+          "httpMethod": "GET",
+          "path": "/search",
+          "methodName": "searchItems",
+          "returnType": "ResponseEntity\u003cList\u003cItemDTO\u003e\u003e",
+          "parameters": [
+            {
+              "name": "searchTerm",
+              "type": "String",
+              "annotation": "RequestParam"
+            }
+          ]
+        },
+        {
+          "httpMethod": "GET",
+          "path": "/price-range",
+          "methodName": "getItemsByPriceRange",
+          "returnType": "ResponseEntity\u003cList\u003cItemDTO\u003e\u003e",
+          "parameters": [
+            {
+              "name": "minPrice",
+              "type": "BigDecimal",
+              "annotation": "RequestParam"
+            },
+            {
+              "name": "maxPrice",
+              "type": "BigDecimal",
+              "annotation": "RequestParam"
+            }
+          ]
+        },
+        {
+          "httpMethod": "POST",
+          "path": "/seller/{sellerId}",
+          "methodName": "createItem",
+          "returnType": "ResponseEntity\u003cItemDTO\u003e",
+          "parameters": [
+            {
+              "name": "sellerId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            },
+            {
+              "name": "request",
+              "type": "ItemRegistrationRequest",
+              "annotation": "RequestBody"
+            }
+          ]
+        },
+        {
+          "httpMethod": "PUT",
+          "path": "/{itemId}",
+          "methodName": "updateItem",
+          "returnType": "ResponseEntity\u003cItemDTO\u003e",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            },
+            {
+              "name": "updateRequest",
+              "type": "ItemUpdateRequest",
+              "annotation": "RequestBody"
+            }
+          ]
+        },
+        {
+          "httpMethod": "DELETE",
+          "path": "/{itemId}",
+          "methodName": "deleteItem",
+          "returnType": "ResponseEntity\u003cVoid\u003e",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        },
+        {
+          "httpMethod": "POST",
+          "path": "/{itemId}/image",
+          "methodName": "uploadItemImage",
+          "returnType": "ResponseEntity\u003cVoid\u003e",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            },
+            {
+              "name": "file",
+              "type": "MultipartFile",
+              "annotation": "RequestParam"
+            }
+          ]
+        },
+        {
+          "httpMethod": "GET",
+          "path": "/{itemId}/image",
+          "methodName": "getItemImage",
+          "returnType": "ResponseEntity\u003cbyte[]\u003e",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        },
+        {
+          "httpMethod": "PATCH",
+          "path": "/{itemId}/mark-sold",
+          "methodName": "markItemAsSold",
+          "returnType": "ResponseEntity\u003cVoid\u003e",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        },
+        {
+          "httpMethod": "PATCH",
+          "path": "/{itemId}/mark-available",
+          "methodName": "markItemAsAvailable",
+          "returnType": "ResponseEntity\u003cVoid\u003e",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "MessageController",
+      "basePath": "/api/v1/messages",
+      "endpoints": [
+        {
+          "httpMethod": "GET",
+          "path": "/user/{userId}",
+          "methodName": "getAllMessagesForUser",
+          "returnType": "ResponseEntity\u003cList\u003cMessageDTO\u003e\u003e",
+          "parameters": [
+            {
+              "name": "userId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        },
+        {
+          "httpMethod": "GET",
+          "path": "/conversation",
+          "methodName": "getConversation",
+          "returnType": "ResponseEntity\u003cList\u003cMessageDTO\u003e\u003e",
+          "parameters": [
+            {
+              "name": "userId1",
+              "type": "Integer",
+              "annotation": "RequestParam"
+            },
+            {
+              "name": "userId2",
+              "type": "Integer",
+              "annotation": "RequestParam"
+            }
+          ]
+        },
+        {
+          "httpMethod": "GET",
+          "path": "/unread/{userId}",
+          "methodName": "getUnreadMessages",
+          "returnType": "ResponseEntity\u003cList\u003cMessageDTO\u003e\u003e",
+          "parameters": [
+            {
+              "name": "userId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        },
+        {
+          "httpMethod": "GET",
+          "path": "/unread/count/{userId}",
+          "methodName": "getUnreadMessageCount",
+          "returnType": "ResponseEntity\u003cLong\u003e",
+          "parameters": [
+            {
+              "name": "userId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        },
+        {
+          "httpMethod": "POST",
+          "path": "/send/{senderId}",
+          "methodName": "sendMessage",
+          "returnType": "ResponseEntity\u003cMessageDTO\u003e",
+          "parameters": [
+            {
+              "name": "senderId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            },
+            {
+              "name": "request",
+              "type": "MessageRequest",
+              "annotation": "RequestBody"
+            }
+          ]
+        },
+        {
+          "httpMethod": "PATCH",
+          "path": "/{messageId}/read",
+          "methodName": "markAsRead",
+          "returnType": "ResponseEntity\u003cVoid\u003e",
+          "parameters": [
+            {
+              "name": "messageId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        },
+        {
+          "httpMethod": "PATCH",
+          "path": "/mark-all-read",
+          "methodName": "markAllAsRead",
+          "returnType": "ResponseEntity\u003cVoid\u003e",
+          "parameters": [
+            {
+              "name": "userId",
+              "type": "Integer",
+              "annotation": "RequestParam"
+            },
+            {
+              "name": "otherUserId",
+              "type": "Integer",
+              "annotation": "RequestParam"
+            }
+          ]
+        },
+        {
+          "httpMethod": "DELETE",
+          "path": "/{messageId}",
+          "methodName": "deleteMessage",
+          "returnType": "ResponseEntity\u003cVoid\u003e",
+          "parameters": [
+            {
+              "name": "messageId",
+              "type": "Integer",
+              "annotation": "PathVariable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "PingPongController",
+      "basePath": "",
+      "endpoints": [
+        {
+          "httpMethod": "GET",
+          "path": "/ping",
+          "methodName": "getPingPong",
+          "returnType": "PingPong",
+          "parameters": []
+        }
+      ]
+    }
+  ],
+  "services": [
+    {
+      "className": "AuthenticationService",
+      "dependencies": [],
+      "methods": [
+        {
+          "name": "login",
+          "returnType": "AuthenticationResponse",
+          "parameters": [
+            {
+              "name": "request",
+              "type": "AuthenticationRequest"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "CustomerDTOMapper",
+      "dependencies": [],
+      "methods": [
+        {
+          "name": "apply",
+          "returnType": "CustomerDTO",
+          "parameters": [
+            {
+              "name": "customer",
+              "type": "Customer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "CustomerService",
+      "dependencies": [],
+      "methods": [
+        {
+          "name": "getAllCustomers",
+          "returnType": "List\u003cCustomerDTO\u003e",
+          "parameters": []
+        },
+        {
+          "name": "getCustomer",
+          "returnType": "CustomerDTO",
+          "parameters": [
+            {
+              "name": "id",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "addCustomer",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "customerRegistrationRequest",
+              "type": "CustomerRegistrationRequest"
+            }
+          ]
+        },
+        {
+          "name": "deleteCustomerById",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "updateCustomer",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer"
+            },
+            {
+              "name": "updateRequest",
+              "type": "CustomerUpdateRequest"
+            }
+          ]
+        },
+        {
+          "name": "uploadCustomerProfileImage",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer"
+            },
+            {
+              "name": "file",
+              "type": "MultipartFile"
+            }
+          ]
+        },
+        {
+          "name": "getCustomerProfileImage",
+          "returnType": "byte[]",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "CustomerUserDetailsService",
+      "dependencies": [],
+      "methods": [
+        {
+          "name": "loadUserByUsername",
+          "returnType": "UserDetails",
+          "parameters": [
+            {
+              "name": "username",
+              "type": "String"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "FavoriteDTOMapper",
+      "dependencies": [],
+      "methods": [
+        {
+          "name": "apply",
+          "returnType": "FavoriteDTO",
+          "parameters": [
+            {
+              "name": "favorite",
+              "type": "Favorite"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "FavoriteService",
+      "dependencies": [],
+      "methods": [
+        {
+          "name": "getFavoritesByCustomerId",
+          "returnType": "List\u003cFavoriteDTO\u003e",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "isItemFavorited",
+          "returnType": "boolean",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer"
+            },
+            {
+              "name": "itemId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "getFavoriteCountForItem",
+          "returnType": "Long",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "addFavorite",
+          "returnType": "FavoriteDTO",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer"
+            },
+            {
+              "name": "itemId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "removeFavorite",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer"
+            },
+            {
+              "name": "itemId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "toggleFavorite",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer"
+            },
+            {
+              "name": "itemId",
+              "type": "Integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "ItemDTOMapper",
+      "dependencies": [],
+      "methods": [
+        {
+          "name": "apply",
+          "returnType": "ItemDTO",
+          "parameters": [
+            {
+              "name": "item",
+              "type": "Item"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "ItemService",
+      "dependencies": [],
+      "methods": [
+        {
+          "name": "getAllItems",
+          "returnType": "List\u003cItemDTO\u003e",
+          "parameters": []
+        },
+        {
+          "name": "getAllAvailableItems",
+          "returnType": "List\u003cItemDTO\u003e",
+          "parameters": []
+        },
+        {
+          "name": "getItemById",
+          "returnType": "ItemDTO",
+          "parameters": [
+            {
+              "name": "id",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "getItemsBySellerId",
+          "returnType": "List\u003cItemDTO\u003e",
+          "parameters": [
+            {
+              "name": "sellerId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "getItemsByCategory",
+          "returnType": "List\u003cItemDTO\u003e",
+          "parameters": [
+            {
+              "name": "category",
+              "type": "String"
+            }
+          ]
+        },
+        {
+          "name": "searchItems",
+          "returnType": "List\u003cItemDTO\u003e",
+          "parameters": [
+            {
+              "name": "searchTerm",
+              "type": "String"
+            }
+          ]
+        },
+        {
+          "name": "getItemsByPriceRange",
+          "returnType": "List\u003cItemDTO\u003e",
+          "parameters": [
+            {
+              "name": "minPrice",
+              "type": "BigDecimal"
+            },
+            {
+              "name": "maxPrice",
+              "type": "BigDecimal"
+            }
+          ]
+        },
+        {
+          "name": "createItem",
+          "returnType": "ItemDTO",
+          "parameters": [
+            {
+              "name": "sellerId",
+              "type": "Integer"
+            },
+            {
+              "name": "request",
+              "type": "ItemRegistrationRequest"
+            }
+          ]
+        },
+        {
+          "name": "updateItem",
+          "returnType": "ItemDTO",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer"
+            },
+            {
+              "name": "updateRequest",
+              "type": "ItemUpdateRequest"
+            }
+          ]
+        },
+        {
+          "name": "deleteItem",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "uploadItemImage",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer"
+            },
+            {
+              "name": "file",
+              "type": "MultipartFile"
+            }
+          ]
+        },
+        {
+          "name": "getItemImage",
+          "returnType": "byte[]",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "markItemAsSold",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "markItemAsAvailable",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "JWTUtil",
+      "dependencies": [],
+      "methods": [
+        {
+          "name": "issueToken",
+          "returnType": "String",
+          "parameters": [
+            {
+              "name": "subject",
+              "type": "String"
+            }
+          ]
+        },
+        {
+          "name": "issueToken",
+          "returnType": "String",
+          "parameters": [
+            {
+              "name": "subject",
+              "type": "String"
+            },
+            {
+              "name": "scopes",
+              "type": "String"
+            }
+          ]
+        },
+        {
+          "name": "issueToken",
+          "returnType": "String",
+          "parameters": [
+            {
+              "name": "subject",
+              "type": "String"
+            },
+            {
+              "name": "scopes",
+              "type": "List\u003cString\u003e"
+            }
+          ]
+        },
+        {
+          "name": "issueToken",
+          "returnType": "String",
+          "parameters": [
+            {
+              "name": "subject",
+              "type": "String"
+            },
+            {
+              "name": "claims",
+              "type": "Map\u003cString,Object\u003e"
+            }
+          ]
+        },
+        {
+          "name": "getSubject",
+          "returnType": "String",
+          "parameters": [
+            {
+              "name": "token",
+              "type": "String"
+            }
+          ]
+        },
+        {
+          "name": "isTokenValid",
+          "returnType": "boolean",
+          "parameters": [
+            {
+              "name": "jwt",
+              "type": "String"
+            },
+            {
+              "name": "username",
+              "type": "String"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "MessageDTOMapper",
+      "dependencies": [],
+      "methods": [
+        {
+          "name": "apply",
+          "returnType": "MessageDTO",
+          "parameters": [
+            {
+              "name": "message",
+              "type": "Message"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "MessageService",
+      "dependencies": [],
+      "methods": [
+        {
+          "name": "getAllMessagesForUser",
+          "returnType": "List\u003cMessageDTO\u003e",
+          "parameters": [
+            {
+              "name": "userId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "getConversation",
+          "returnType": "List\u003cMessageDTO\u003e",
+          "parameters": [
+            {
+              "name": "userId1",
+              "type": "Integer"
+            },
+            {
+              "name": "userId2",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "getUnreadMessages",
+          "returnType": "List\u003cMessageDTO\u003e",
+          "parameters": [
+            {
+              "name": "userId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "getUnreadMessageCount",
+          "returnType": "Long",
+          "parameters": [
+            {
+              "name": "userId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "sendMessage",
+          "returnType": "MessageDTO",
+          "parameters": [
+            {
+              "name": "senderId",
+              "type": "Integer"
+            },
+            {
+              "name": "request",
+              "type": "MessageRequest"
+            }
+          ]
+        },
+        {
+          "name": "markAsRead",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "messageId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "markAllAsRead",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "userId",
+              "type": "Integer"
+            },
+            {
+              "name": "otherUserId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "deleteMessage",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "messageId",
+              "type": "Integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "S3Service",
+      "dependencies": [],
+      "methods": [
+        {
+          "name": "putObject",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "bucketName",
+              "type": "String"
+            },
+            {
+              "name": "key",
+              "type": "String"
+            },
+            {
+              "name": "file",
+              "type": "byte[]"
+            }
+          ]
+        },
+        {
+          "name": "getObject",
+          "returnType": "byte[]",
+          "parameters": [
+            {
+              "name": "bucketName",
+              "type": "String"
+            },
+            {
+              "name": "key",
+              "type": "String"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "repositories": [
+    {
+      "interfaceName": "CustomerRepository",
+      "entityType": "Customer",
+      "idType": "Integer",
+      "customMethods": [
+        {
+          "name": "existsCustomerByEmail",
+          "returnType": "boolean",
+          "parameters": [
+            {
+              "name": "email",
+              "type": "String"
+            }
+          ]
+        },
+        {
+          "name": "existsCustomerById",
+          "returnType": "boolean",
+          "parameters": [
+            {
+              "name": "id",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "findCustomerByEmail",
+          "returnType": "Optional\u003cCustomer\u003e",
+          "parameters": [
+            {
+              "name": "email",
+              "type": "String"
+            }
+          ]
+        },
+        {
+          "name": "updateProfileImageId",
+          "returnType": "int",
+          "parameters": [
+            {
+              "name": "profileImageId",
+              "type": "String"
+            },
+            {
+              "name": "customerId",
+              "type": "Integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interfaceName": "FavoriteRepository",
+      "entityType": "Favorite",
+      "idType": "Integer",
+      "customMethods": [
+        {
+          "name": "findAllByCustomerId",
+          "returnType": "List\u003cFavorite\u003e",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "existsByCustomerIdAndItemId",
+          "returnType": "boolean",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer"
+            },
+            {
+              "name": "itemId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "findByCustomerIdAndItemId",
+          "returnType": "Optional\u003cFavorite\u003e",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer"
+            },
+            {
+              "name": "itemId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "countByItemId",
+          "returnType": "Long",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "deleteByCustomerIdAndItemId",
+          "returnType": "void",
+          "parameters": [
+            {
+              "name": "customerId",
+              "type": "Integer"
+            },
+            {
+              "name": "itemId",
+              "type": "Integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interfaceName": "ItemRepository",
+      "entityType": "Item",
+      "idType": "Integer",
+      "customMethods": [
+        {
+          "name": "findAllBySellerId",
+          "returnType": "List\u003cItem\u003e",
+          "parameters": [
+            {
+              "name": "sellerId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "findByCategory",
+          "returnType": "List\u003cItem\u003e",
+          "parameters": [
+            {
+              "name": "category",
+              "type": "String"
+            }
+          ]
+        },
+        {
+          "name": "findByStatus",
+          "returnType": "List\u003cItem\u003e",
+          "parameters": [
+            {
+              "name": "status",
+              "type": "ItemStatus"
+            }
+          ]
+        },
+        {
+          "name": "findAllAvailable",
+          "returnType": "List\u003cItem\u003e",
+          "parameters": []
+        },
+        {
+          "name": "searchItems",
+          "returnType": "List\u003cItem\u003e",
+          "parameters": [
+            {
+              "name": "searchTerm",
+              "type": "String"
+            }
+          ]
+        },
+        {
+          "name": "findByPriceRange",
+          "returnType": "List\u003cItem\u003e",
+          "parameters": [
+            {
+              "name": "minPrice",
+              "type": "BigDecimal"
+            },
+            {
+              "name": "maxPrice",
+              "type": "BigDecimal"
+            }
+          ]
+        },
+        {
+          "name": "findByCategoryAndStatus",
+          "returnType": "List\u003cItem\u003e",
+          "parameters": [
+            {
+              "name": "category",
+              "type": "String"
+            },
+            {
+              "name": "status",
+              "type": "ItemStatus"
+            }
+          ]
+        },
+        {
+          "name": "findAvailableItemsBySellerId",
+          "returnType": "List\u003cItem\u003e",
+          "parameters": [
+            {
+              "name": "sellerId",
+              "type": "Integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interfaceName": "MessageRepository",
+      "entityType": "Message",
+      "idType": "Integer",
+      "customMethods": [
+        {
+          "name": "findAllByUserId",
+          "returnType": "List\u003cMessage\u003e",
+          "parameters": [
+            {
+              "name": "userId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "findConversationBetweenUsers",
+          "returnType": "List\u003cMessage\u003e",
+          "parameters": [
+            {
+              "name": "userId1",
+              "type": "Integer"
+            },
+            {
+              "name": "userId2",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "findByItemId",
+          "returnType": "List\u003cMessage\u003e",
+          "parameters": [
+            {
+              "name": "itemId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "findUnreadMessagesByUserId",
+          "returnType": "List\u003cMessage\u003e",
+          "parameters": [
+            {
+              "name": "userId",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "name": "countUnreadMessagesByUserId",
+          "returnType": "Long",
+          "parameters": [
+            {
+              "name": "userId",
+              "type": "Integer"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "className": "Customer",
+      "tableName": "customer",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Integer",
+          "annotations": [
+            "@Id",
+            "@GeneratedValue"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "annotations": [
+            "@Column"
+          ]
+        },
+        {
+          "name": "email",
+          "type": "String",
+          "annotations": [
+            "@Column"
+          ]
+        },
+        {
+          "name": "age",
+          "type": "Integer",
+          "annotations": [
+            "@Column"
+          ]
+        },
+        {
+          "name": "gender",
+          "type": "Gender",
+          "annotations": [
+            "@Column"
+          ]
+        },
+        {
+          "name": "password",
+          "type": "String",
+          "annotations": [
+            "@Column"
+          ]
+        },
+        {
+          "name": "profileImageId",
+          "type": "String",
+          "annotations": [
+            "@Column"
+          ]
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "className": "Favorite",
+      "tableName": "favorite",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Integer",
+          "annotations": [
+            "@Id",
+            "@GeneratedValue"
+          ]
+        },
+        {
+          "name": "createdAt",
+          "type": "LocalDateTime",
+          "annotations": [
+            "@Column"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "type": "ManyToOne",
+          "fieldName": "customer",
+          "targetEntity": "Customer"
+        },
+        {
+          "type": "ManyToOne",
+          "fieldName": "item",
+          "targetEntity": "Item"
+        }
+      ]
+    },
+    {
+      "className": "Item",
+      "tableName": "item",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Integer",
+          "annotations": [
+            "@Id",
+            "@GeneratedValue"
+          ]
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "annotations": [
+            "@Column"
+          ]
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "annotations": [
+            "@Column"
+          ]
+        },
+        {
+          "name": "price",
+          "type": "BigDecimal",
+          "annotations": [
+            "@Column"
+          ]
+        },
+        {
+          "name": "category",
+          "type": "String",
+          "annotations": [
+            "@Column"
+          ]
+        },
+        {
+          "name": "imageId",
+          "type": "String",
+          "annotations": [
+            "@Column"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "ItemStatus",
+          "annotations": [
+            "@Column"
+          ]
+        },
+        {
+          "name": "createdAt",
+          "type": "LocalDateTime",
+          "annotations": [
+            "@Column"
+          ]
+        },
+        {
+          "name": "updatedAt",
+          "type": "LocalDateTime",
+          "annotations": [
+            "@Column"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "type": "ManyToOne",
+          "fieldName": "seller",
+          "targetEntity": "Customer"
+        }
+      ]
+    },
+    {
+      "className": "Message",
+      "tableName": "message",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Integer",
+          "annotations": [
+            "@Id",
+            "@GeneratedValue"
+          ]
+        },
+        {
+          "name": "content",
+          "type": "String",
+          "annotations": [
+            "@Column"
+          ]
+        },
+        {
+          "name": "isRead",
+          "type": "Boolean",
+          "annotations": [
+            "@Column"
+          ]
+        },
+        {
+          "name": "createdAt",
+          "type": "LocalDateTime",
+          "annotations": [
+            "@Column"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "type": "ManyToOne",
+          "fieldName": "sender",
+          "targetEntity": "Customer"
+        },
+        {
+          "type": "ManyToOne",
+          "fieldName": "receiver",
+          "targetEntity": "Customer"
+        },
+        {
+          "type": "ManyToOne",
+          "fieldName": "item",
+          "targetEntity": "Item"
+        }
+      ]
+    }
+  ]
+}

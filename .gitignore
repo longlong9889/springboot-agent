@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+target/
+
+# Environment
+.env
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Build outputs
+dist/
+build/
+
+# Uploads
+agent/uploads/
+
+# Misc
+.DS_Store
+*.log
