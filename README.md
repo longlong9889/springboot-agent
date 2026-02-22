@@ -1,37 +1,40 @@
 # Spring Boot Analyzer
 
-An LLM-powered tool that helps developers understand Spring Boot codebases through natural language queries.
+An LLM-powered tool that helps developers understand Spring Boot codebases through natural language questions.
 
 ## Features
 
 - Upload any Spring Boot project (.zip)
-- Ask natural language questions about the codebase
+- Ask natural language questions about your codebase
 - Trace request flows from controller to database
-- View all endpoints, services, repositories, and entities
+- Explore endpoints, services, repositories, and entities
+
+## Demo
+
+[Live Demo](https://springboot-agent.vercel.app/)
 
 ## Tech Stack
 
-- **Parser**: Java + JavaParser
-- **Backend**: Node.js + Express + OpenAI API
-- **Frontend**: React + TypeScript
+- **Frontend:** React, TypeScript, Vite
+- **Backend:** Node.js, Express, OpenAI API
+- **Parser:** TypeScript (also available in Java)
 
 ## Getting Started
 
 ### Prerequisites
 
-- Java 17+
 - Node.js 18+
 - OpenAI API key
 
-### Setup
+### Installation
 
-1. Build the parser:
+1. Clone the repo
 ```bash
-   cd parser
-   mvn clean package -q
+   git clone https://github.com/longlong9889/springboot-agent.git
+   cd springboot-agent
 ```
 
-2. Start the backend:
+2. Start the backend
 ```bash
    cd agent
    npm install
@@ -39,7 +42,7 @@ An LLM-powered tool that helps developers understand Spring Boot codebases throu
    npm run server
 ```
 
-3. Start the frontend:
+3. Start the frontend
 ```bash
    cd frontend
    npm install
@@ -51,8 +54,15 @@ An LLM-powered tool that helps developers understand Spring Boot codebases throu
 ## How It Works
 
 1. User uploads a Spring Boot project
-2. Java parser extracts controllers, services, repositories, and entities
+2. Parser extracts controllers, services, repositories, and entities
 3. LLM agent uses custom tools to answer questions about the codebase
+
+## Example Questions
+
+- "What endpoints does this app have?"
+- "Tell me about the UserController"
+- "How do users send messages?"
+- "Trace GET /api/v1/items/{itemId}"
 
 ## License
 
